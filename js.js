@@ -57,7 +57,7 @@ const createTemplate = (task, index) => {
         <li>
           <input onclick="completeTask(${index})" type="checkbox" ${task.completed ? 'checked' : ''}>
           <span class="task">${task.description}</span>
-          <button onclick="deleteTask(${index})" class="delete-btn">DELETE</button>
+          <button class="delete-btn" onclick="deleteTask(${index})">DELETE</button>
         </li>
     `
 }
@@ -86,10 +86,17 @@ const completeTask = (index) => {
 
 //delete task
 const deleteTask = (index) => {
+
+    event.target.parentNode.classList.add('deleted');
+
+    setTimeout(() =>
+    {
         tasks.splice(index, 1);
         updateLocal();
         addTaskInHTML();
+    }, 250 );
 }
 
+// taskList.addEventListener('click', deleteTask())
 
 
